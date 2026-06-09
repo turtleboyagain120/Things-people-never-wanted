@@ -10,3 +10,4 @@ each document is clear, nice and suppose to be long as possible to delelete any 
 It is also a sequal tohttps://github.com/wea-f/ByePassHub since it was archived. I hope I collab with @wea-f.
 As a 9+ years old in a bit of game dev, coding, exploiter (as-in parental controls), I also make oss licenses.
 All work in this project is "as-is" without any warranty (see license on the right if this readme).
+> Read BEGINNER101.txt for beginners.
