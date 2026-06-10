@@ -11,3 +11,4 @@ It is also a sequal tohttps://github.com/wea-f/ByePassHub since it was archived.
 As a 9+ years old in a bit of game dev, coding, exploiter (as-in parental controls), I also make oss licenses.
 All work in this project is "as-is" without any warranty (see license on the right if this readme).
 > Read BEGINNER101.txt for beginners.
+Also start with start1.txt then see start2 then 3 ect... beginner 101.txt was informal intro. Do not care what it ends with (mmd, txt ect...) still useful.
