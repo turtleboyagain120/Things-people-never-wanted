@@ -1,0 +1,14 @@
+                                            START1.txt (where it starts.)
+                                             <timmytheonlinegirl@hotmail.com>
+                                      ____________________________________
+exploited loopholes targeted towards microsoft family saftey (further documents hereinafter shall target other filters). Using microsoft edge with the stupid filters I came up with exploits. The following are:
+
+A) very stupid loophole but check your microsoft account(s) and find your dadsa account and try to enter family saftey or the settings:
+
+                1. Get to your dads account after you press your profile.
+                  2. Go to "https://account.microsoft.com/family/windows/coldstart" and then press the sign in button and hope it auto logs you in.
+                    3. alternitivly, just press ... button on the right of your profile - > settings - > passwords and autofill - > press any of the 3 options you see.
+                    _____________________________________________________________________________________________________________________________________
+                    My dads like an 18+ years in it admin and I found this exploit like 4ish months ago (from 6/10/26).
+                    or just go back to BEGINNER101.txt (or just go to https://github.com/turtleboyagain120/uploaded-doc-tools/blob/main/BEGINNER101.txt) and see the websites. try each one.
+        
