@@ -1,0 +1,22 @@
+{
+  "name": "iframe-loader-v3-helpers",
+  "version": "1.0.0",
+  "description": "Optional proxy and analytics server helpers for Ultra Custom IFRAME Loader V3",
+  "main": "proxy-server.js",
+  "scripts": {
+    "start:proxy": "node proxy-server.js",
+    "start:analytics": "node analytics-server.js",
+    "start:all": "concurrently \"node proxy-server.js\" \"node analytics-server.js\""
+  },
+  "author": "turtleboyagain120",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "morgan": "^1.10.0",
+    "node-fetch": "^2.6.7"
+  },
+  "devDependencies": {
+    "concurrently": "^8.0.1"
+  }
+}
