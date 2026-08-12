@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" role="img" aria-labelledby="title desc">
+  <title id="title">Explosion Ring</title>
+  <desc id="desc">Stylized impact explosion ring.</desc>
+  <rect width="220" height="220" fill="#061116"/>
+  <g filter="url(#glow)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="110" cy="110" r="46" stroke="#ffd166" stroke-width="8"/>
+    <path d="M110 22v42M110 156v42M22 110h42M156 110h42" stroke="#ff8a2a" stroke-width="7"/>
+    <path d="M48 48l30 30M142 142l30 30M172 48l-30 30M78 142l-30 30" stroke="#ff2d55" stroke-width="5"/>
+    <circle cx="110" cy="110" r="12" stroke="#ecfbff" stroke-width="5"/>
+  </g>
+  <defs><filter id="glow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+</svg>

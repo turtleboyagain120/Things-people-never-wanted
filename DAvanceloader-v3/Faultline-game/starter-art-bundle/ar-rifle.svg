@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 120" role="img" aria-labelledby="title desc">
+  <title id="title">AR Rifle</title>
+  <desc id="desc">Assault rifle prop for FAULTLINE fan art.</desc>
+  <rect width="340" height="120" fill="#061116"/>
+  <g fill="#11191f" stroke="#4df7ff" stroke-width="4" stroke-linejoin="round" filter="url(#glow)">
+    <path d="M38 50h166l22 14h74v18h-98l-22-14H38z"/>
+    <path d="M76 68l-18 34h28l18-34z"/>
+    <path d="M146 68l8 38h32l-10-38z"/>
+    <path d="M206 50l24-26h34l-26 26z"/>
+    <path d="M300 58h28v14h-28z"/>
+  </g>
+  <defs><filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 120" role="img" aria-labelledby="title desc">
+  <title id="title">Pistol</title>
+  <desc id="desc">Simple pistol prop for alternate weapon art.</desc>
+  <rect width="260" height="120" fill="#061116"/>
+  <g fill="#11191f" stroke="#ecfbff" stroke-width="4" stroke-linejoin="round" filter="url(#glow)">
+    <path d="M48 48h116l18 14h36v18h-78l-16-14H48z"/>
+    <path d="M94 66l-10 38h34l14-38z"/>
+    <path d="M160 52h48v10h-48z"/>
+  </g>
+  <defs><filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+</svg>

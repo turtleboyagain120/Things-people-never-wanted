@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 260" role="img" aria-labelledby="title desc">
+  <title id="title">Boss Twin</title>
+  <desc id="desc">Evil twin boss concept with cyan and red glow.</desc>
+  <rect width="280" height="260" fill="#061116"/>
+  <path d="M36 218h210" stroke="#303942" stroke-width="14" stroke-linecap="round"/>
+  <g stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none" filter="url(#glow)">
+    <circle cx="136" cy="54" r="20" fill="#10181d" stroke="#ff2d55"/>
+    <path d="M132 76l-10 72 38 4 9-66" stroke="#ff2d55"/>
+    <path d="M124 98l-52 18" stroke="#4df7ff"/>
+    <path d="M160 98l70 2" stroke="#ff2d55"/>
+    <path d="M126 148l-42 62" stroke="#4df7ff"/>
+    <path d="M158 152l44 58" stroke="#ff2d55"/>
+    <path d="M194 98h48" stroke="#111"/>
+  </g>
+  <path d="M78 38l118 178" stroke="#4df7ff" stroke-width="3" opacity=".35"/>
+  <defs><filter id="glow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+</svg>

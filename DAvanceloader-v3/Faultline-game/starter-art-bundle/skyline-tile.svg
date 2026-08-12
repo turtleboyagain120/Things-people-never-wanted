@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 240" role="img" aria-labelledby="title desc">
+  <title id="title">Skyline Tile</title>
+  <desc id="desc">Reusable city skyline background tile.</desc>
+  <rect width="420" height="240" fill="#061116"/>
+  <g fill="#132027">
+    <rect x="0" y="94" width="72" height="146"/>
+    <rect x="88" y="52" width="86" height="188"/>
+    <rect x="196" y="116" width="62" height="124"/>
+    <rect x="278" y="72" width="96" height="168"/>
+    <rect x="388" y="130" width="48" height="110"/>
+  </g>
+  <g fill="#4df7ff" opacity=".45">
+    <rect x="20" y="116" width="8" height="8"/><rect x="44" y="146" width="8" height="8"/>
+    <rect x="112" y="82" width="8" height="8"/><rect x="146" y="122" width="8" height="8"/><rect x="128" y="174" width="8" height="8"/>
+    <rect x="298" y="102" width="8" height="8"/><rect x="342" y="142" width="8" height="8"/>
+  </g>
+  <g fill="#ffd166" opacity=".38">
+    <rect x="52" y="190" width="8" height="8"/><rect x="226" y="150" width="8" height="8"/><rect x="318" y="188" width="8" height="8"/>
+  </g>
+</svg>

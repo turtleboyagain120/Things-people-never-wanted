@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 220" role="img" aria-labelledby="title desc">
+  <title id="title">Gamepad Diagram</title>
+  <desc id="desc">Simple controller reference icon.</desc>
+  <rect width="360" height="220" fill="#061116"/>
+  <path d="M80 72h200c36 0 60 26 60 66 0 34-16 52-40 52-18 0-34-20-48-42H108c-14 22-30 42-48 42-24 0-40-18-40-52 0-40 24-66 60-66z" fill="#11191f" stroke="#4df7ff" stroke-width="6" filter="url(#glow)"/>
+  <circle cx="112" cy="126" r="22" fill="#303942" stroke="#ecfbff" stroke-width="4"/>
+  <circle cx="244" cy="118" r="11" fill="#ff2d55"/><circle cx="274" cy="118" r="11" fill="#ffd166"/>
+  <circle cx="244" cy="148" r="11" fill="#4df7ff"/><circle cx="274" cy="148" r="11" fill="#ff8a2a"/>
+  <path d="M154 126h48M178 102v48" stroke="#56616b" stroke-width="8" stroke-linecap="round"/>
+  <defs><filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+</svg>

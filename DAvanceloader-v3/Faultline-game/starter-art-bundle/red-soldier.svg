@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" role="img" aria-labelledby="title desc">
+  <title id="title">Red Soldier</title>
+  <desc id="desc">Regular red enemy silhouette.</desc>
+  <rect width="220" height="220" fill="#061116"/>
+  <path d="M48 188h126" stroke="#303942" stroke-width="12" stroke-linecap="round"/>
+  <g stroke="#ff2d55" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none" filter="url(#glow)">
+    <circle cx="104" cy="52" r="16" fill="#ff2d55"/>
+    <path d="M104 70v58"/>
+    <path d="M104 88l-40 20"/>
+    <path d="M104 88h74"/>
+    <path d="M104 128l-28 50"/>
+    <path d="M104 128l32 50"/>
+    <path d="M142 88h54" stroke="#111"/>
+  </g>
+  <defs><filter id="glow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+</svg>

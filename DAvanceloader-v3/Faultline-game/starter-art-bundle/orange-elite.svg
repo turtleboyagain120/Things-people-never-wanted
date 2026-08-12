@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-labelledby="title desc">
+  <title id="title">Orange Elite</title>
+  <desc id="desc">Shielded orange pressure enemy.</desc>
+  <rect width="240" height="240" fill="#061116"/>
+  <circle cx="122" cy="112" r="70" fill="none" stroke="#ff8a2a" stroke-width="6" opacity=".75"/>
+  <g stroke="#ff8a2a" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none" filter="url(#glow)">
+    <circle cx="122" cy="56" r="16" fill="#ff8a2a"/>
+    <path d="M122 74v70"/>
+    <path d="M122 92l-48 18"/>
+    <path d="M122 92h70"/>
+    <path d="M122 144l-28 54"/>
+    <path d="M122 144l36 54"/>
+    <path d="M158 92h50" stroke="#111"/>
+  </g>
+  <defs><filter id="glow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+</svg>
