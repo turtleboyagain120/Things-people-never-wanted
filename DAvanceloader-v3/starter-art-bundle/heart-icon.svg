@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 160" role="img" aria-labelledby="title desc">
+  <title id="title">Heart Icon</title>
+  <desc id="desc">Health heart icon.</desc>
+  <rect width="180" height="160" fill="#061116"/>
+  <path d="M90 136C48 102 24 82 24 52c0-22 16-36 36-36 13 0 24 7 30 18 6-11 17-18 30-18 20 0 36 14 36 36 0 30-24 50-66 84z" fill="#ff2d55" stroke="#ff7895" stroke-width="5" filter="url(#glow)"/>
+  <defs><filter id="glow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+</svg>

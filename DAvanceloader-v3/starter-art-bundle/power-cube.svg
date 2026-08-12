@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" role="img" aria-labelledby="title desc">
+  <title id="title">Power Cube</title>
+  <desc id="desc">Overdrive power cube pickup.</desc>
+  <rect width="220" height="220" fill="#061116"/>
+  <g filter="url(#glow)" stroke-linejoin="round">
+    <path d="M110 36l62 34v70l-62 44-62-44V70z" fill="#10262b" stroke="#4df7ff" stroke-width="7"/>
+    <path d="M110 36v70l62-36M110 106L48 70M110 106v78" fill="none" stroke="#ecfbff" stroke-width="4" opacity=".5"/>
+    <path d="M88 102l22-38 22 38-22 38z" fill="#ffd166" opacity=".85"/>
+  </g>
+  <defs><filter id="glow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+</svg>

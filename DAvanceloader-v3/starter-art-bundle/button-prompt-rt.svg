@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 150" role="img" aria-labelledby="title desc">
+  <title id="title">RT Button Prompt</title>
+  <desc id="desc">Controller right trigger prompt.</desc>
+  <rect width="220" height="150" fill="#061116"/>
+  <path d="M44 38h132l20 36-20 38H44L24 74z" fill="#10262b" stroke="#4df7ff" stroke-width="7" stroke-linejoin="round" filter="url(#glow)"/>
+  <text x="110" y="94" text-anchor="middle" font-family="Impact, Arial Black, sans-serif" font-size="58" fill="#ecfbff">RT</text>
+  <defs><filter id="glow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+</svg>

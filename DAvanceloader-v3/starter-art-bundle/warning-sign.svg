@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" role="img" aria-labelledby="title desc">
+  <title id="title">Warning Sign</title>
+  <desc id="desc">Orange rooftop danger sign.</desc>
+  <rect width="240" height="180" fill="#061116"/>
+  <path d="M120 24l90 132H30z" fill="#20140a" stroke="#ff8a2a" stroke-width="7" stroke-linejoin="round" filter="url(#glow)"/>
+  <path d="M120 66v44" stroke="#ffd166" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="120" cy="132" r="7" fill="#ffd166"/>
+  <path d="M64 156h112" stroke="#303942" stroke-width="10" stroke-linecap="round"/>
+  <defs><filter id="glow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+</svg>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160" role="img" aria-labelledby="title desc">
+  <title id="title">Smoke Puff</title>
+  <desc id="desc">Soft smoke cloud reference.</desc>
+  <rect width="240" height="160" fill="#061116"/>
+  <g fill="#6f7f89" opacity=".34">
+    <ellipse cx="72" cy="96" rx="42" ry="28"/>
+    <ellipse cx="116" cy="80" rx="54" ry="36"/>
+    <ellipse cx="166" cy="98" rx="48" ry="30"/>
+    <ellipse cx="124" cy="112" rx="76" ry="24"/>
+  </g>
+  <g fill="#4df7ff" opacity=".18">
+    <ellipse cx="98" cy="78" rx="30" ry="12"/>
+    <ellipse cx="154" cy="102" rx="24" ry="10"/>
+  </g>
+</svg>

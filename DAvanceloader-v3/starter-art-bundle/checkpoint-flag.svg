@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" role="img" aria-labelledby="title desc">
+  <title id="title">Checkpoint Flag</title>
+  <desc id="desc">Cyan checkpoint flag.</desc>
+  <rect width="220" height="220" fill="#061116"/>
+  <path d="M74 184V38" stroke="#4df7ff" stroke-width="8" stroke-linecap="round" filter="url(#glow)"/>
+  <path d="M78 44l96 32-96 38z" fill="#10262b" stroke="#4df7ff" stroke-width="7" filter="url(#glow)"/>
+  <path d="M44 190h94" stroke="#303942" stroke-width="14" stroke-linecap="round"/>
+  <path d="M92 72h42" stroke="#ecfbff" stroke-width="5" opacity=".45"/>
+  <defs><filter id="glow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+</svg>

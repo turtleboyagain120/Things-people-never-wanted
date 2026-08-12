@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 220" role="img" aria-labelledby="title desc">
+  <title id="title">Cyan Runner Air Strafe</title>
+  <desc id="desc">Air strafe pose with speed streaks.</desc>
+  <rect width="260" height="220" fill="#061116"/>
+  <g stroke="#4df7ff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none" filter="url(#glow)">
+    <path d="M28 62h74M18 92h92M38 122h58" opacity=".55"/>
+    <circle cx="145" cy="55" r="16" fill="#4df7ff"/>
+    <path d="M140 72l-36 45 34 26 32-54"/>
+    <path d="M120 95l-54-6"/>
+    <path d="M154 92l62-18"/>
+    <path d="M136 140l-68 35"/>
+    <path d="M145 143l57 38"/>
+  </g>
+  <defs><filter id="glow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+</svg>

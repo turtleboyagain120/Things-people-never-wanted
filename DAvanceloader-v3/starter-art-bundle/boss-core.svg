@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" role="img" aria-labelledby="title desc">
+  <title id="title">Boss Core</title>
+  <desc id="desc">Boss weak-point core reference.</desc>
+  <rect width="220" height="220" fill="#061116"/>
+  <g filter="url(#glow)" fill="none" stroke-linejoin="round">
+    <path d="M110 28l72 42v80l-72 42-72-42V70z" stroke="#ff2d55" stroke-width="7" fill="#180b11"/>
+    <circle cx="110" cy="110" r="38" stroke="#ffd166" stroke-width="6"/>
+    <path d="M110 72v76M72 110h76" stroke="#4df7ff" stroke-width="5" opacity=".55"/>
+    <circle cx="110" cy="110" r="14" fill="#ff2d55" stroke="#ecfbff" stroke-width="4"/>
+  </g>
+  <defs><filter id="glow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+</svg>

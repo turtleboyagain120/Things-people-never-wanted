@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-labelledby="title desc">
+  <title id="title">Cyan Runner</title>
+  <desc id="desc">FAULTLINE player silhouette with cyan glow.</desc>
+  <rect width="240" height="240" fill="#061116"/>
+  <g filter="url(#glow)" stroke="#4df7ff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <circle cx="118" cy="46" r="18" fill="#4df7ff"/>
+    <path d="M116 66l-8 58 26 4 8-48"/>
+    <path d="M109 88l-46 18"/>
+    <path d="M133 88l48 10"/>
+    <path d="M112 123l-34 62"/>
+    <path d="M132 128l32 58"/>
+  </g>
+  <path d="M58 205h124" stroke="#303942" stroke-width="12" stroke-linecap="round"/>
+  <defs><filter id="glow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 220" role="img" aria-labelledby="title desc">
+  <title id="title">FAULTLINE Logo</title>
+  <desc id="desc">Neon cyan FAULTLINE logo on a dark brutalist plate.</desc>
+  <rect width="640" height="220" rx="8" fill="#061116"/>
+  <path d="M28 162h584l-18 28H48z" fill="#222b33"/>
+  <path d="M56 72h528v70H56z" fill="#0b161c" stroke="#4df7ff" stroke-width="4"/>
+  <text x="320" y="121" text-anchor="middle" font-family="Impact, Arial Black, sans-serif" font-size="58" fill="#ecfbff" stroke="#4df7ff" stroke-width="1.5">FAULTLINE</text>
+  <path d="M82 152h150M408 152h150" stroke="#ff2d55" stroke-width="6" stroke-linecap="round" opacity=".65"/>
+  <path d="M262 158l36-82 32 82 38-82" fill="none" stroke="#4df7ff" stroke-width="8" stroke-linejoin="round"/>
+</svg>
