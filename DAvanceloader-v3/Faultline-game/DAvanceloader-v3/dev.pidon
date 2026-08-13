@@ -1,0 +1,9 @@
+{target} = "localhost:3000"
+{height} = 560
+{zoom} = 100
+{mode} = "direct"
+
+type("Development configuration")
+type("TARGET: {target}")
+type("URL: https://{target}")
+type("PVM STATUS: READY")

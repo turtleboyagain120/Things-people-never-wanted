@@ -1,0 +1,24 @@
+[package]
+name = "advanceloader-config"
+version = "2.1.0"
+description = "Persistent PIDON deployment configuration for AdvanceLoader"
+entry = "deploy.pidon"
+license = "MIT"
+
+[pidon]
+language = "2.1"
+bytecode = "pbc"
+strict = true
+space_processing = true
+
+[deployment]
+artifacts = [
+  "deployment.db.json",
+  "deployment.json",
+  "deploy.pidon",
+  "dev.pidon"
+]
+default_environment = "production"
+guest_session_minutes = 20
+guest_cooldown_minutes = 120
+cloud_lease_seconds = 30
