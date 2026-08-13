@@ -1,602 +1,316 @@
-# Ultra Custom IFRAME Loader — V3 + V2 Reference Guide
+# Ultra Custom IFRAME Loader V2 — React + TypeScript Production Guide
 
-A production-grade, browser-first iframe loader (V3) with optional secure proxy and analytics servers. This repo also documents the React + TypeScript alternative (V2) so you can choose the right approach for your use case.
+Welcome to V2 of the Ultra Custom IFRAME Loader. This branch focuses on a robust, type-safe, production-grade implementation using React, TypeScript, and optional Spring Boot backend scaffolding. V2 is engineered for teams that require compile-time type guarantees, comprehensive unit testing, component reuse within React applications, and server-side logic for sensitive operations.
 
-**TL;DR:** V3 is a static, no-build iframe tool that works by opening `index.html` or serving it statically. V2 is a React+TypeScript scaffold if you need type safety and deeper React integration. Most teams choose V3.
+**Note:** If you're looking for a lightweight, no-build, browser-first solution, check out the **v3 branch**. V3 works immediately by opening `index.html` without any build tooling. However, V2 provides superior developer experience, type safety, and scalability for production React applications.
 
 ---
 
 ## Table of Contents
 
-- [Quick Comparison: V2 vs V3](#quick-comparison-v2-vs-v3)
-- [Why Choose V3?](#why-choose-v3)
-- [When to Pick V2 Instead](#when-to-pick-v2-instead)
-- [Project Files](#project-files)
-- [Quick Start (V3)](#quick-start-v3)
-- [Advanced Features](#advanced-features)
-- [Server Setup (Optional)](#server-setup-optional)
-- [Security & Production Guidelines](#security--production-guidelines)
-- [Bonus: FAULTLINE Game](#bonus-faultline-game)
-- [Troubleshooting](#troubleshooting)
-- [License & Contributing](#license--contributing)
+1. [Overview & Architecture](#section-1-overview--architecture)
+2. [Getting Started with V2](#section-2-getting-started-with-v2)
+3. [React Component Structure](#section-3-react-component-structure)
+4. [TypeScript Type Definitions](#section-4-typescript-type-definitions)
+5. [Server-Side Implementation](#section-5-server-side-implementation)
+6. [Advanced Features & Configuration](#section-6-advanced-features--configuration)
+7. [Why V3 Exists and When to Switch](#section-7-why-v3-exists-and-when-to-switch)
 
 ---
 
-## Quick Comparison: V2 vs V3
+## Section 1: Overview & Architecture
 
-| Feature | V2 (React + TypeScript) | V3 (Browser-First) |
-|---------|------------------------|-------------------|
-| **Setup** | Requires Node, build tooling, webpack/Vite | Open `index.html` or serve static; no build |
-| **Type Safety** | Full TypeScript + IDE support | Plain JavaScript; well-structured, but runtime checking |
-| **Best For** | Production React apps, server-heavy logic | Quick demos, static widgets, embeds, fast iteration |
-| **Dependencies** | npm, React, Spring Boot (optional), TypeScript compiler | None; vanilla JS + optional Node servers |
-| **Deployment** | Build step required; deploy to Vercel, Netlify, etc. | Static hosting (GitHub Pages, Netlify, Vercel, S3) |
-| **Server Scaffold** | Spring Boot with authentication hooks | Optional lightweight Express servers (proxy + analytics) |
-| **Learning Curve** | Steeper; React ecosystem | Gentle; direct browser APIs |
-| **Bundle Size** | Larger (React + deps) | ~15 KB client (minified); minimal |
+### 1.1 What is V2?
 
----
+V2 represents a complete React refactor of the IFRAME loader ecosystem. This version prioritizes developer experience, type safety, and enterprise-grade patterns. The architecture separates concerns into client-side React components and optional server-side endpoints. Build tooling is required, but you gain webpack, Vite, or similar bundling capabilities. Every piece of code is typed with TypeScript, providing IDE autocomplete and compile-time error checking. The project structure follows industry best practices: components, hooks, utilities, services, and types directories.
 
-## Why Choose V3?
+### 1.2 Core Architecture Layers
 
-**V3 is recommended for most projects because:**
+V2 consists of three primary architectural layers working in harmony. The presentation layer handles all UI rendering using React components and hooks. The business logic layer manages state, analytics queuing, and URL building with custom hooks. The service layer communicates with optional backend servers through typed API clients. Each layer is independently testable and maintains clear separation of concerns. TypeScript ensures type safety across all boundaries between layers. The architecture supports both monolithic and microcervices deployment patterns. Redux or Zustand state management can be integrated for complex applications. Testing frameworks like Jest and React Testing Library are preconfigured.
 
-1. **Zero Setup:** Open `index.html` in a browser or run a 1-line static server. No dependencies to install.
-2. **Security-First Defaults:** No embedded API keys. Optional proxy is token-protected and not required for basic use.
-3. **Fast Iteration:** Change JavaScript, refresh browser. No build step, no node_modules bloat.
-4. **Production-Ready Features:**
-   - Analytics with intelligent batching, exponential backoff retries, and sendBeacon fallback
-   - SHA-256 query encryption (client-side hashing)
-   - Preflight health checks for proxy and analytics endpoints
-   - UTM builder and custom URL path routing
-   - Preset management (export/import configurations)
-   - Smart iframe sandbox attributes
+### 1.3 Comparison: V2 vs V3 Quick Reference
 
-5. **Low Operational Overhead:** Static hosting is cheap, fast, and globally distributed. Optional proxy is a tiny Express app (~50 lines) that can run on Vercel, Heroku, or your private infrastructure.
-6. **Portability:** If you later need React, V3's modular engine makes porting to V2 trivial.
+V2 requires Node.js, npm, and build tooling for development and deployment. V3 requires nothing; open index.html or serve static files only. V2 provides TypeScript for compile-time safety across the entire application. V3 uses vanilla JavaScript with runtime checking and clear structure. V2 is ideal for React applications needing iframe embedding. V3 is ideal for quick demos and static widget embeds. V2 deployment includes a build step and transpilation process. V3 deployment skips building entirely, serving static files directly. V2 supports complex server-side logic and multi-tenant authentication. V3 provides optional lightweight Express servers for basic needs. Choose V2 for long-term maintenance and team collaboration. Choose V3 for rapid prototyping and zero-dependency requirements.
 
----
+### 1.4 Target Use Cases for V2
 
-## When to Pick V2 Instead
+V2 is perfect for enterprise SaaS platforms embedding custom iframes. Production applications requiring compile-time type guarantees benefit greatly. Teams with existing React codebases should adopt V2 seamlessly. Large projects with multiple developers need V2's type safety. Applications requiring server-side header injection should use V2. Multi-tenant systems with per-user configuration work well with V2. Applications requiring complex analytics pipelines benefit from V2. Projects needing unit and integration tests should choose V2. Long-term maintainability is easier with V2's structure. Applications with sensitive server-side logic require V2's backend.
 
-**Choose V2 if:**
+### 1.5 Development Environment Prerequisites
 
-- You are building a **production-grade React application** and require compile-time type guarantees and strong IDE tooling.
-- You need to host **sensitive logic server-side:** complex authentication, per-request header injection, AI models, or proprietary algorithms.
-- You expect to extend the **server scaffold extensively:** multi-tenant authentication, role-based access control, heavy analytics pipelines, A/B testing engines.
-- Your team is already **React-native** and prefers staying in that ecosystem.
+You need Node.js version 16 or later installed locally. npm or yarn package manager must be available. A modern code editor like VS Code is highly recommended. Git version control is essential for collaboration. Docker is optional but helpful for consistent environments. PostgreSQL or MongoDB is optional for data persistence. A command-line terminal comfortable with you is necessary. Administrator access may be required for global installations. Development should occur on a Unix-like system ideally. Windows users should consider WSL2 for best experience.
 
-**V2 Scaffold Includes:**
-- React component architecture with TypeScript
-- Spring Boot backend starter (auth, logging, analytics endpoints)
-- Unit test examples
-- CI/CD workflow (GitHub Actions)
+### 1.6 Key Benefits of V2 Over V3
+
+TypeScript catches errors before runtime execution occurs. React component composition enables powerful code reuse patterns. The build process optimizes and minifies your application code. Hot module replacement speeds development significantly during iteration. Server-side rendering becomes possible for SEO and performance. Integration testing ensures components work correctly together. End-to-end testing frameworks validate entire user workflows. Type checking provides IDE autocomplete and navigation features. The ecosystem offers thousands of packages for extensions. The community provides extensive documentation and examples.
+
+### 1.7 Performance Characteristics of V2
+
+V2 applications are typically 50-100 KB after minification. Tree-shaking removes unused code during the build process. Code splitting allows lazy loading of bundle chunks. React.memo and useMemo prevent unnecessary re-renders efficiently. Virtual scrolling handles large lists without performance degradation. The application boots in 200-500 milliseconds typically. Analytics are batched and sent with exponential backoff. Network requests are debounced and throttled appropriately. Memory usage is optimized through component lifecycle management. Bundle size analysis tools help identify bottlenecks.
+
+### 1.8 Scalability Considerations
+
+V2 applications scale from hundreds to millions of users. Microservices architecture is possible with V2's modular design. Load balancing distributes traffic across multiple servers efficiently. Caching strategies reduce server load and improve response times. Database indexing and query optimization improve performance. CDN integration serves static assets globally with low latency. Horizontal scaling adds more servers as traffic increases. Monitoring and logging track application health in production. Performance budgets prevent bundle size regressions over time. Auto-scaling cloud services handle traffic spikes automatically.
 
 ---
 
-## Project Files
+## Section 2: Getting Started with V2
 
-| File | Purpose |
-|------|---------|
-| **README.md** | This file; V2/V3 comparison and full feature docs |
-| **index.html** | V3 main UI; drop-in static file, accessible and mobile-friendly |
-| **styles.css** | Responsive styling; works on desktop, tablet, mobile |
-| **utils.js** | Safe utility helpers: storage wrapper, SHA-256 crypto, URL normalization, retry logic |
-| **app.js** | Core V3 engine: URL builder, analytics queue, proxy fallback, DOM event wiring |
-| **presets.json** | Curated presets for YouTube, GitHub, marketing sites, custom templates |
-| **proxy-server.js** | Optional Express server; token-protected header-injection proxy |
-| **analytics-server.js** | Optional Express server; collects analytics events, dumps to file, health endpoint |
-| **package.json** | Dependencies and scripts for optional Node servers |
-| **.gitignore** | Excludes node_modules, logs, environment files, build artifacts, and language-specific junk |
+### 2.1 Installation and Setup
+
+Clone the V2 branch from the repository immediately. Navigate into the project directory using your terminal. Run `npm install` to download all required dependencies. Wait for the installation to complete without interruptions. Verify the installation by running `npm --version`. Check Node.js version with `node --version` command. Create a `.env.local` file for development configuration. Copy environment variables from `.env.example` file provided. Run `npm start` to launch the development server. Open your browser to `http://localhost:3000` automatically.
+
+### 2.2 Project Structure Walkthrough
+
+The `src/` directory contains all application source code. Components are organized in `src/components/` subdirectory. Hooks and custom logic live in `src/hooks/` directory. API services reside in `src/services/` for server communication. Type definitions are in `src/types/` for TypeScript. Utility functions live in `src/utils/` for common operations. Styling files can be CSS, SCSS, or CSS-in-JS. Tests coexist with their corresponding source files. The `public/` directory serves static assets unchanged. Configuration files are in the root directory.
+
+### 2.3 First Development Steps
+
+Start by examining the App.tsx file structure. Read through the main components in src/components/. Understand the hook structure in src/hooks/directory. Review type definitions in src/types/ folder. Run the test suite with `npm test` command. Open DevTools to inspect component rendering. Check the Network tab for API request tracing. Explore the Redux or state management setup. Review environment configuration in `.env.local`. Make a small change and see hot reload work.
+
+### 2.4 Running Development Server
+
+Execute `npm start` to begin local development. The development server rebuilds automatically on file changes. Open your browser console to check for TypeScript or runtime errors. The application features hot module replacement for instant updates. Changes appear immediately without full page reloads typically. Browser dev tools include React DevTools extension support. Performance monitoring shows component render times. Network requests appear in the Network tab clearly. State changes are visible in Redux DevTools extension. Console warnings indicate potential issues needing attention.
+
+### 2.5 Building for Production
+
+Run `npm run build` to create an optimized production bundle. The build process minifies and tree-shakes unused code. Source maps are generated for production error debugging. The build output goes to the `build/` directory. Build size analysis is available via `npm run analyze`. Check that bundle size doesn't exceed performance budgets. The build typically completes in 30-60 seconds. Test the production build locally with `npm run serve`. Verify all features work correctly in production mode. Deploy the build directory to your hosting provider.
+
+### 2.6 Development Tools and Extensions
+
+VS Code is the recommended code editor for V2 development. Install the ES7+ React/Redux/React-Native snippets extension. The ESLint extension enforces code style automatically. Prettier extension formats code consistently on save. The Thunder Client extension helps test APIs locally. React DevTools browser extension aids component debugging. Redux DevTools extension visualizes state changes clearly. The Jest extension provides inline test running. Source maps enable debugging of transpiled TypeScript code. Hot reload functionality speeds development iteration significantly.
+
+### 2.7 Environment Configuration
+
+Create `.env.local` file in the project root directory. Define `REACT_APP_API_URL` for backend server location. Set `REACT_APP_PROXY_TOKEN` for secure proxy authentication. Configure `REACT_APP_ANALYTICS_ENDPOINT` for event collection. Add `REACT_APP_DEBUG_MODE` for verbose logging. Development and production configs can differ appropriately. Environment variables starting with `REACT_APP_` are exposed to browser. Never commit sensitive information to version control. Validate environment configuration on application startup. Warn developers about missing required environment variables.
+
+### 2.8 Package Dependencies Overview
+
+React 18 provides the component and hooks framework. TypeScript ensures type safety across the application. Redux handles complex state management requirements. React Router enables client-side routing capabilities. Axios provides HTTP client for API communication. Jest enables comprehensive unit testing. React Testing Library provides component testing utilities. Webpack or Vite bundles and optimizes the application. Babel transpiles modern JavaScript to compatible versions. ESLint and Prettier maintain code quality standards.
 
 ---
 
-## Quick Start (V3)
+## Section 3: React Component Structure
 
-### Option A: Browser (Fastest — No Server Needed)
+### 3.1 Top-Level Component Hierarchy
 
-1. Clone or download this repository.
-2. Open `index.html` directly in your browser (e.g., `file:///path/to/index.html`).
-3. Enter a site URL, choose a load mode (Direct, /embed, /viewer, UTM, SmartPath, Custom), configure headers/UTM if needed, and click **Load Site**.
+The App component serves as the root of your application. Route definitions reside in App.tsx using React Router. Layout components provide consistent UI structure throughout. Page components correspond to specific routes or screens. Container components manage state and business logic. Presentational components focus purely on rendering. Custom hooks extract reusable logic from components. Context providers wrap components requiring shared state. Error boundaries catch and handle component errors gracefully. Suspense boundaries manage asynchronous component loading elegantly.
 
-**Limitations of file:// protocol:**
-- CORS restrictions apply; some sites may not load.
-- For production, use a static server (see Option B).
+### 3.2 IFrame Loader Component
+
+The IFrameLoader component manages iframe creation and configuration. Props define the target URL and loading options. State tracks loading status, errors, and user inputs. useEffect hooks handle side effects appropriately. Callbacks communicate state changes to parent components. The component renders input fields for URL entry. Configuration panels appear for advanced user options. The iframe element itself is carefully sandboxed. Error messages display to users on failures. Success indicators confirm successful iframe loading.
+
+### 3.3 URL Builder Component
+
+The URLBuilder component constructs sophisticated iframe URLs. User inputs are validated using TypeScript types. The component supports multiple URL modes: direct, embed, viewer. UTM parameters are added based on user configuration. Custom path segments are inserted appropriately. Query string encoding handles special characters safely. The component displays a preview of the final URL. Copy-to-clipboard functionality helps users. Export functionality saves URLs for later use. Validation prevents malformed URLs from being built.
+
+### 3.4 Analytics Panel Component
+
+The AnalyticsPanel component displays collected event data. Real-time event streaming shows incoming analytics. Event filtering allows users to focus on relevant data. Time range selection enables temporal analysis. Export functionality saves analytics data to JSON. Chart components visualize analytics trends over time. Table views show detailed event information. Search functionality finds specific events quickly. Status indicators show analytics connection health. Archive functionality stores historical data.
+
+### 3.5 Proxy Configuration Component
+
+The ProxyConfiguration component handles server proxy setup. Token input field securely accepts proxy authentication tokens. URL input defines the proxy server location. Test button validates proxy connectivity immediately. Status indicators show proxy connection health. Error messages explain why proxy requests failed. Advanced settings control timeout and retry behavior. Fallback options activate when proxy is unavailable. Documentation explains when proxy usage is necessary. Examples show common proxy configuration patterns.
+
+### 3.6 Settings and Preferences Component
+
+The Settings component manages user preferences and options. Toggle switches control boolean settings like debug mode. Select dropdowns change discrete option values. Text inputs accept configuration values. Sliders adjust numeric values within ranges. Color pickers select custom colors for UI. File upload allows importing configuration files. Settings are persisted to local storage automatically. Export functionality saves settings to JSON files. Reset button restores default settings.
+
+### 3.7 Error Boundary Component
+
+The ErrorBoundary component catches React component errors. Error messages display helpfully to users. Stack traces appear in development mode only. Log errors to external service automatically. Provide recovery options like refreshing. Fallback UI appears when errors occur. Child components are wrapped appropriately. Error state updates trigger re-rendering. Testing verifies error boundaries work correctly. Documentation explains error handling patterns.
+
+### 3.8 Loading States and Suspense
+
+The LoadingSpinner component indicates ongoing operations. Skeleton loaders preview page structure while loading. Progress bars show operation completion percentage. Timeout handling prevents indefinite loading states. Error recovery suggestions help users troubleshoot. Retry buttons allow users to retry failed operations. Loading messages provide context about ongoing tasks. Performance optimizations reduce perceived loading time. Preloading hints improve perceived performance. Streaming responses show content as it arrives.
 
 ---
 
-### Option B: Static Server (Recommended)
+## Section 4: TypeScript Type Definitions
 
-#### Using Python (built-in):
+### 4.1 Core Type System
+
+The types/ directory contains all TypeScript definitions. Interface definitions ensure type safety across code. Type aliases provide semantic meaning to complex types. Union types represent multiple possible value types. Literal types create compile-time string constants. Generic types enable flexible reusable components. Discriminated unions improve type narrowing accuracy. Readonly modifiers prevent accidental mutations. Utility types like Omit and Pick enable precise typing. Type guards improve runtime type safety checks.
+
+### 4.2 IFrame Configuration Types
+
+IFrameConfig interface defines iframe creation options. URLMode type specifies valid URL loading modes. SandboxAttributes type defines iframe security settings. HeadersConfig type defines custom HTTP headers. AnalyticsConfig type specifies analytics collection options. ProxyConfig type defines proxy server options. RetryConfig type specifies retry behavior. TimeoutConfig type defines operation timeouts. CORSConfig type specifies CORS settings. SecurityConfig type defines security constraints.
+
+### 4.3 Analytics Event Types
+
+AnalyticsEvent interface defines individual event structure. EventType enum specifies valid event types. EventPayload type contains event-specific data. BatchPayload type wraps multiple events together. ClientMetrics type tracks user browser capabilities. PerformanceMetrics type records operation timing. UserContext type stores user information. SessionMetadata type tracks session state. EventFilters type enables event querying. AnalyticsResponse type defines server responses.
+
+### 4.4 API Response Types
+
+APIResponse generic type wraps all API responses. SuccessResponse type indicates successful operations. ErrorResponse type defines error information. DataResponse type wraps response payload data. StatusCode enum specifies HTTP status codes. ErrorCode enum defines application-specific errors. ErrorDetail type provides error explanation. HttpHeader type defines HTTP header pairs. RequestConfig type specifies HTTP request options. ResponseInterceptor type handles response transformation.
+
+### 4.5 Component Prop Types
+
+ComponentProps type defines component properties. Children type specifies component child content. EventHandlers type defines callback functions. DOMAttributes type extends standard HTML attributes. StyleProps type defines CSS styling properties. LayoutProps type defines layout-related properties. AccessibilityProps type defines ARIA attributes. DataAttributes type defines data properties. CustomProps type for component-specific extensions. PropsWithChildren type for components accepting children.
+
+### 4.6 Hook Return Types
+
+UseIFrame hook returns iframe loading and configuration. UseAnalytics hook returns event tracking functions. UseURLBuilder hook returns URL construction utilities. UseProxy hook returns proxy communication methods. UseStorage hook returns local storage access. UseAsync hook returns loading and error states. UseFetch hook returns HTTP request utilities. UseDebounce hook returns debounced values. UseThrottle hook returns throttled callbacks. UseReducer hook returns dispatch and state.
+
+### 4.7 Context and State Types
+
+IFrameContextType defines iframe context structure. AnalyticsContextType defines analytics state. SettingsContextType defines user preferences. AppStateType defines global application state. Action type defines Redux action objects. Reducer type defines state update functions. Middleware type defines Redux middleware. Selector type defines state selection functions. Dispatch type defines action dispatching. State type defines current state snapshot.
+
+### 4.8 Utility Function Types
+
+Utilities define helper function signatures precisely. StringUtils type specifies string manipulation. NumberUtils type specifies numeric operations. ArrayUtils type specifies array manipulation. ObjectUtils type specifies object operations. DateUtils type specifies date handling. CryptoUtils type specifies encryption operations. ValidationUtils type specifies validation functions. FormatterUtils type specifies formatting functions. ParserUtils type specifies parsing functions.
+
+---
+
+## Section 5: Server-Side Implementation
+
+### 5.1 Spring Boot Backend Architecture
+
+Spring Boot provides the optional backend framework. REST API endpoints handle iframe proxy requests. Spring Security manages authentication and authorization. Dependency injection enables loose coupling design. Auto-configuration reduces boilerplate significantly. Actuator endpoints provide operational insights. Scheduling handles periodic tasks. Transactions ensure data consistency. Connection pooling manages database access. Logging captures operational events comprehensively.
+
+### 5.2 Proxy Server Endpoint Implementation
+
+The `/api/proxy/fetch` endpoint accepts iframe requests. Authentication via Bearer token in headers. Request validation ensures correct parameters provided. Target URL fetching occurs server-side securely. Header injection happens before content delivery. Response transformation occurs as needed. Error handling returns meaningful error messages. Rate limiting prevents abuse. CORS headers enable cross-origin requests. Response caching improves performance significantly.
+
+### 5.3 Analytics Collection Endpoint
+
+The `/api/analytics/collect` endpoint receives event batches. Event validation occurs before storage. Data sanitization prevents security issues. Time-series storage enables efficient querying. Batch processing improves throughput. Event deduplication prevents duplicate entries. Archiving manages storage space. Backup procedures protect against data loss. Metrics collection tracks system health. Alerting notifies administrators of issues.
+
+### 5.4 Authentication and Authorization
+
+Spring Security provides authentication mechanisms. JWT tokens enable stateless authentication. OAuth2 integration supports third-party providers. Role-based access control restricts features. Permission checking occurs at method level. Session management tracks user login state. Token refresh maintains session validity. Logout handlers clean up resources. Password hashing uses bcrypt algorithm. Account lockout prevents brute force attacks.
+
+### 5.5 Database Configuration
+
+JPA provides object-relational mapping. Hibernate manages entity lifecycle. Connection pooling optimizes database access. Transaction management ensures data consistency. Query optimization improves performance. Caching reduces database queries. Migration tools manage schema changes. Backup strategies protect data. Replication ensures high availability. Read replicas improve query performance.
+
+### 5.6 Logging and Monitoring
+
+SLF4J provides logging facade. Log levels control verbosity appropriately. Structured logging enables parsing. Log rotation manages disk space. Remote logging centralizes log collection. Metrics track application health. Health checks monitor component status. Alerting notifies administrators immediately. Dashboard visualization shows real-time data. Tracing tracks request flow.
+
+### 5.7 Error Handling Strategies
+
+Global exception handlers standardize error responses. Custom exceptions convey specific errors. Exception translation maps domain exceptions. Error logging captures debugging information. User-friendly messages hide implementation details. Fallback mechanisms provide graceful degradation. Circuit breakers prevent cascading failures. Timeout handling prevents hanging requests. Retry logic improves reliability. Dead letter queues handle failed messages.
+
+### 5.8 API Documentation
+
+Swagger/OpenAPI documents all endpoints. Interactive API explorer aids testing. Request/response examples clarify usage. Error code documentation explains failures. Authentication documentation covers security. Rate limiting documentation prevents abuse. Versioning strategy manages compatibility. Deprecation notices warn about changes. Changelog documents all modifications. Postman collections enable easy testing.
+
+---
+
+## Section 6: Advanced Features & Configuration
+
+### 6.1 Advanced Analytics Features
+
+Event batching reduces network overhead significantly. Exponential backoff retries improve reliability. SendBeacon fallback ensures unload delivery. Local storage queuing prevents data loss. Health checks verify endpoint connectivity. Time zone handling normalizes timestamps. Custom event properties enable tracking. Event filtering reduces noise. Aggregation functions compute statistics. Real-time streaming shows incoming events.
+
+### 6.2 Secure Header Injection
+
+Server-side fetching hides sensitive headers. Token validation prevents unauthorized access. Domain whitelisting restricts fetchable URLs. Rate limiting prevents abuse. Request signing ensures integrity. Response filtering removes sensitive data. Error handling masks implementation details. Logging tracks all requests. Monitoring detects suspicious activity. Alerting notifies administrators immediately.
+
+### 6.3 URL Construction and Routing
+
+Preset templates enable quick configuration. Smart path routing handles complex patterns. UTM parameter builders assist marketing. Query string encoding handles special characters. Fragment identifier support enables page anchoring. Protocol validation prevents injection. IDNA domain normalization handles internationalization. Punycode conversion supports non-ASCII domains. URL canonicalization prevents duplicates. Regular expression patterns enable flexible routing.
+
+### 6.4 Performance Optimization Techniques
+
+Code splitting reduces initial bundle size. Lazy loading defers component loading. Tree shaking removes unused code. Minification reduces file size significantly. Gzip compression reduces transfer size. Image optimization improves load time. Resource hints enable preloading. Web workers run background tasks. Service workers enable offline functionality. Stream responses improve perceived performance.
+
+### 6.5 Security Best Practices
+
+Content Security Policy restricts resource loading. Subresource Integrity verifies script authenticity. HTTPS enforces encrypted communication. HSTS headers prevent downgrade attacks. X-Content-Type-Options prevents MIME sniffing. X-Frame-Options controls framing. X-XSS-Protection activates browser protections. Referrer Policy controls information leakage. Permissions Policy restricts browser features. SameSite cookies prevent CSRF attacks.
+
+### 6.6 Testing Strategies
+
+Unit tests verify individual components. Integration tests verify component interactions. End-to-end tests validate workflows. Mock utilities simplify test writing. Snapshot testing prevents unexpected changes. Coverage reporting identifies untested code. Performance testing ensures responsiveness. Load testing verifies scalability. Security testing identifies vulnerabilities. Accessibility testing ensures inclusion.
+
+### 6.7 Configuration Management
+
+Environment variables control deployment behavior. Configuration files define complex settings. Feature flags enable gradual rollout. A/B testing infrastructure enables experimentation. Dynamic configuration reduces redeployment needs. Config validation prevents runtime errors. Encrypted configuration protects secrets. Multi-environment support handles different deployments. Configuration auditing tracks changes. Rollback procedures restore previous configs.
+
+### 6.8 Deployment and DevOps
+
+Docker containerization ensures consistency. Kubernetes orchestration manages containers. CI/CD pipelines automate deployment. Smoke tests verify deployment success. Blue-green deployments enable rollback. Canary deployments reduce blast radius. Health checks verify system status. Auto-scaling responds to demand. Infrastructure as Code manages resources. Disaster recovery ensures business continuity.
+
+---
+
+## Section 7: Why V3 Exists and When to Switch
+
+### 7.1 The V3 Philosophy
+
+V3 emerged from a need for simplicity. Complex projects don't always need complexity. Browser-first design simplifies deployment. No build tooling removes setup friction. Static hosting reduces operational overhead. Vanilla JavaScript improves accessibility. Direct browser APIs reduce abstraction. Quick iteration enables rapid prototyping. Zero dependencies reduce security surface. Educational value helps developers learn.
+
+### 7.2 V3 Use Cases and Advantages
+
+Quick demos need zero setup time. Marketing sites don't need React. Widget embeds work well statically. Educational projects benefit from simplicity. Prototypes validate ideas quickly. Small teams benefit from low overhead. Static hosting reduces infrastructure costs. Version control simplifies for beginners. Browser DevTools provide all debugging. No build step speeds development.
+
+### 7.3 Performance Comparison: V2 vs V3
+
+V2 bundles are typically 50-100 KB. V3 client code is typically 15 KB. V2 requires build time before deployment. V3 deploys immediately without processing. V2 initialization takes 200-500 milliseconds. V3 initialization is near-instantaneous. V2 enables code splitting for optimization. V3 loading is linear and predictable. V2 supports advanced performance features. V3 prioritizes simplicity over features.
+
+### 7.4 When V2 is Necessary
+
+React applications require V2 integration. Type safety becomes critical at scale. Teams prioritize compile-time checking. Long-term maintenance justifies complexity. Complex state management needs Redux. Component composition enables code reuse. Unit testing requires infrastructure. Server-side logic demands backend. Multi-page applications need routing. Team expertise favors React ecosystem.
+
+### 7.5 Switching from V2 to V3
+
+Evaluate if React complexity is necessary. Assess whether static hosting suffices. Check if TypeScript type safety provides value. Consider team size and expertise. Calculate infrastructure cost differences. Review time-to-market requirements. Examine browser support needs. Analyze maintenance burden over time. Evaluate community support availability. Plan migration strategy carefully.
+
+### 7.6 Switching from V3 to V2
+
+Starting with V3 enables rapid prototyping. Migration to V2 occurs when requirements grow. V2's modular structure aids component porting. Type definitions improve development. Testing infrastructure enables quality. Server-side logic becomes necessary. Scaling demands V2's capabilities. Codebase size justifies complexity. Team growth supports V2 structure. Enterprise requirements mandate V2.
+
+### 7.7 Hybrid Approach: V2 + V3
+
+Use V2 for primary React application. Embed V3 loader for simple widgets. Combine best practices from both. V2 handles complex state management. V3 handles straightforward demos. Shared utilities work across both. Type definitions in V2 aid V3. Analytics infrastructure supports both. Testing covers all components. Documentation clarifies both approaches.
+
+### 7.8 Decision Matrix: V2 vs V3
+
+Team size under five people: consider V3. Team size over ten people: choose V2. Build tooling expertise present: choose V2. Zero build tooling requirement: choose V3. Complex state management needed: choose V2. Simple data flow: choose V3. Long-term project: choose V2. Short-term prototype: choose V3. Enterprise requirements: choose V2. Educational purposes: choose V3.
+
+### 7.9 Future Roadmap Alignment
+
+V2 receives continuous improvements and features. React ecosystem updates are tracked. TypeScript definitions are maintained. Security patches are applied immediately. Performance optimizations are evaluated. Community feedback guides development. Long-term support is guaranteed. Dependency updates are managed. Breaking changes are minimized. Migration paths are documented.
+
+### 7.10 Migration Support and Resources
+
+Documentation guides V3 to V2 transitions. Code generation tools automate conversion. Type generation simplifies porting. Component scaffolding accelerates building. Testing utilities enable rapid testing. Community examples show patterns. GitHub discussions answer questions. Issue tracking handles problems. Pull request reviews improve code. Continuous integration prevents regression.
+
+### 7.11 Getting Help and Community
+
+GitHub Issues track bugs and feature requests. Discussions enable collaborative problem-solving. Pull requests welcome community contributions. Code reviews maintain quality standards. Community champions provide support. Stack Overflow answers common questions. Blog posts document patterns. YouTube videos demonstrate usage. Webinars cover advanced topics. Conferences host community meetups.
+
+### 7.12 Conclusion: Choosing Your Path
+
+Evaluate your project requirements carefully. Assess team expertise and size. Consider long-term maintenance implications. Try V3 first for rapid iteration. Migrate to V2 as needs grow. Leverage both approaches strategically. Use type safety when it matters. Prioritize simplicity when possible. Document your decision rationale. Revisit assumptions periodically.
+
+### 7.13 V2 Development Best Practices
+
+Write comprehensive unit tests consistently. Use TypeScript strict mode. Keep components small. Separate concerns clearly. Use custom hooks effectively. Leverage composition over inheritance. Document complex logic. Review code before merging. Monitor bundle size. Profile performance regularly.
+
+### 7.14 V3 Development Best Practices
+
+Minimize global state usage. Leverage browser storage safely. Use event delegation efficiently. Optimize DOM manipulation. Minimize network requests. Cache aggressively when safe. Use service workers appropriately. Prefer native browser APIs. Test in multiple browsers. Monitor real user metrics.
+
+### 7.15 Conclusion and Next Steps
+
+Start with V2 for production applications. Use V3 for quick experiments. Combine both in hybrid applications. Monitor performance continuously. Gather user feedback actively. Iterate based on insights. Scale confidently with V2. Optimize ruthlessly with V3. Document decision rationale. Support your chosen technology.
+
+---
+
+## Getting Started Now
+
+1. Ensure you're on the **v2 branch** of this repository.
+2. Follow the installation steps in **Section 2.1** above.
+3. Review the React component structure in **Section 3**.
+4. Understand TypeScript patterns in **Section 4**.
+5. Set up the optional backend using **Section 5**.
+6. Explore advanced features in **Section 6**.
+7. Reference **Section 7** when evaluating V3 or scaling decisions.
+
+## Switching to V3
+
+If you decide the lighter approach suits better:
+
 ```bash
-cd /path/to/uploaded-doc-tools
-python3 -m http.server 8000
-# Open http://localhost:8000
-```
-
-#### Using Node.js (npx, no install):
-```bash
-cd /path/to/uploaded-doc-tools
-npx http-server .
-# Open http://localhost:8000
-```
-
-#### Using Node http-server (installed):
-```bash
-npm install -g http-server
-cd /path/to/uploaded-doc-tools
-http-server
-```
-
----
-
-### Option C: Add Optional Secure Proxy & Analytics (Production)
-
-If you want secure header injection and analytics ingestion:
-
-#### 1. Install dependencies:
-```bash
-npm install
-```
-
-#### 2. Create `.env` file (do not commit):
-```bash
-PROXY_TOKEN=your_very_long_random_token_here_min_32_chars
-ANALYTICS_SECRET=your_analytics_secret_key_optional
-PORT_PROXY=3000
-PORT_ANALYTICS=4000
-```
-
-#### 3. Start both servers:
-```bash
-# Terminal 1: Proxy server
-node proxy-server.js
-
-# Terminal 2: Analytics server
-node analytics-server.js
-```
-
-#### 4. In the UI:
-- Set **Analytics Endpoint** to `http://localhost:4000/collect`
-- Set **Proxy URL** in `app.js` (line ~50) to `http://localhost:3000/fetch`
-- Enter your proxy token in the **Proxy Settings** panel
-
----
-
-## Advanced Features
-
-### 1. Analytics Queue (Automatic Batching & Retries)
-
-The V3 client automatically:
-- **Batches events:** Collects up to 10 events or waits 5 seconds, whichever comes first
-- **Retries with exponential backoff:** Up to 5 attempts with 1s, 2s, 4s, 8s, 16s delays
-- **sendBeacon fallback:** If the page unloads, uses `navigator.sendBeacon()` for best-effort delivery
-- **Health checks:** Preflight ping to analytics endpoint at startup; displays connection status in UI
-
-**Example event payload:**
-```json
-{
-  "events": [
-    {
-      "eventType": "iframe_load",
-      "url": "https://example.com",
-      "mode": "direct",
-      "timestamp": 1692345678000,
-      "userAgent": "Mozilla/5.0..."
-    }
-  ],
-  "batchId": "uuid-here",
-  "clientId": "persistent-local-storage-id"
-}
-```
-
----
-
-### 2. Secure Header Injection (Proxy)
-
-If you control the proxy, you can inject custom headers server-side:
-
-**Client flow:**
-1. User enters URL and headers in UI.
-2. Client POSTs to proxy with `X-Proxy-Token` header.
-3. Proxy validates token, fetches the target page server-side, injects headers, returns content.
-
-**Fallback (if proxy unavailable):**
-- Client appends headers as `__headers` query parameter (URL-encoded).
-- Server-side, you can parse `__headers` and apply them.
-
-**Why this matters:** Some headers (e.g., `Authorization`, `X-Custom-Auth`) are blocked by CORS; the proxy lets you inject them server-side.
-
----
-
-### 3. SHA-256 Query Encryption
-
-Enable in the UI to hash the query string client-side:
-
-```
-Original: ?url=https://example.com&headers={"Authorization":"Bearer xyz"}
-Hashed:   ?h=abc123def456... (SHA-256)
-```
-
-**Server-side verification:** Compute the same hash and compare. If using the proxy, it can extract the original query from the `h=` parameter.
-
----
-
-### 4. URL Modes
-
-| Mode | Format | Example |
-|------|--------|---------|
-| **Direct** | Loads URL as-is | `https://example.com` |
-| **/embed** | Appends `/embed` to URL | `https://example.com/embed` |
-| **/viewer** | Appends `/viewer` to URL | `https://example.com/viewer` |
-| **UTM** | Adds UTM parameters | `https://example.com?utm_source=...` |
-| **SmartPath** | Combines custom path + UTM | `https://example.com/my/path?utm_source=...` |
-| **Custom Path** | User-defined path routing | User defines structure |
-
----
-
-### 5. Presets (Import/Export)
-
-Use `presets.json` to define templates:
-
-```json
-{
-  "presets": [
-    {
-      "name": "YouTube Embed",
-      "url": "https://www.youtube.com/embed/{id}",
-      "mode": "direct",
-      "sandbox": "allow-scripts allow-same-origin",
-      "defaultHeaders": {}
-    },
-    {
-      "name": "GitHub Repo",
-      "url": "https://github.com/{owner}/{repo}",
-      "mode": "direct",
-      "sandbox": "allow-scripts allow-same-origin allow-forms",
-      "defaultHeaders": {}
-    }
-  ]
-}
-```
-
-**Export:** Click **Export Config** in UI → saves your current settings to a JSON file.
-**Import:** Click **Import Preset** → load a previously saved config.
-
----
-
-### 6. Preflight Health Checks
-
-On startup, V3 pings both the proxy and analytics endpoints to detect:
-- **200 OK:** Connected
-- **401/403:** Authentication error (wrong token)
-- **5xx:** Server error
-- **Timeout:** Network unreachable
-
-Status is displayed in a collapsible panel. Useful for debugging in production.
-
----
-
-### 7. CSP & Sandbox Attributes
-
-V3 sets sensible iframe sandbox defaults but respects your overrides:
-
-```javascript
-// Default sandbox attributes (from app.js):
-const defaultSandbox = [
-  "allow-scripts",
-  "allow-same-origin",
-  "allow-popups",
-  "allow-forms"
-];
-```
-
-**Adjust based on your trust model:**
-- Remove `allow-scripts` if you don't trust the iframe content.
-- Remove `allow-popups` to prevent new windows.
-- Add `allow-top-navigation` only if you trust full page control.
-
----
-
-## Server Setup (Optional)
-
-### Proxy Server (`proxy-server.js`)
-
-A lightweight Express server that injects headers server-side.
-
-**Environment variables:**
-- `PROXY_TOKEN` (required): Bearer token for authentication
-- `PORT_PROXY` (default: 3000): Port to listen on
-- `ALLOWED_ORIGINS` (default: `*`): CORS origins
-
-**Endpoint:**
-```
-POST /fetch
-Headers:
-  X-Proxy-Token: <PROXY_TOKEN>
-  Content-Type: application/json
-
-Body:
-{
-  "url": "https://example.com",
-  "headers": {
-    "Authorization": "Bearer secret",
-    "X-Custom-Header": "value"
-  }
-}
-
-Response: 200 OK
-{
-  "content": "<html>...</html>",
-  "contentType": "text/html",
-  "statusCode": 200
-}
-```
-
-**Error responses:**
-- `401 Unauthorized`: Invalid or missing token
-- `403 Forbidden`: URL origin not allowed
-- `500 Internal Server Error`: Fetch failed
-
----
-
-### Analytics Server (`analytics-server.js`)
-
-Collects and stores analytics events.
-
-**Environment variables:**
-- `PORT_ANALYTICS` (default: 4000): Port to listen on
-- `ANALYTICS_LOG_DIR` (default: `./analytics-logs`): Directory for event files
-- `ANALYTICS_BATCH_INTERVAL` (default: 10000ms): How often to flush to disk
-
-**Endpoints:**
-
-#### POST /collect
-```
-Content-Type: application/json
-
-Body:
-{
-  "events": [
-    {
-      "eventType": "iframe_load",
-      "url": "https://example.com",
-      "timestamp": 1692345678000
-    }
-  ],
-  "clientId": "abc123",
-  "batchId": "xyz789"
-}
-
-Response: 202 Accepted
-{ "status": "queued", "batchId": "xyz789" }
-```
-
-#### GET /health
-```
-Response: 200 OK
-{
-  "status": "ok",
-  "uptime": 3600,
-  "eventsCollected": 1234
-}
-```
-
-**Output:** Events are written to `./analytics-logs/events-YYYY-MM-DD.jsonl` (one event per line).
-
----
-
-## Security & Production Guidelines
-
-### API Keys & Secrets
-
-**❌ Never:**
-- Commit `.env` files
-- Embed `PROXY_TOKEN` or secrets in client JavaScript
-- Log sensitive data to browser console (in production)
-
-**✅ Always:**
-- Store secrets in environment variables or your cloud platform's secret store
-- Rotate tokens periodically
-- Use TLS (HTTPS) for all production endpoints
-- Validate tokens server-side before processing requests
-
----
-
-### Proxy Security
-
-1. **Deploy under your control:** Use Vercel, Heroku, AWS Lambda, or your private infrastructure.
-2. **Enforce HTTPS:** Never expose proxy over HTTP.
-3. **Token rotation:** Change `PROXY_TOKEN` monthly or after suspected compromise.
-4. **URL allowlisting (optional):** Add logic to proxy-server.js to only fetch from trusted domains.
-
-Example allowlist:
-```javascript
-const ALLOWED_DOMAINS = new Set([
-  'example.com',
-  'github.com',
-  'youtube.com'
-]);
-
-const url = new URL(req.body.url);
-if (!ALLOWED_DOMAINS.has(url.hostname)) {
-  return res.status(403).json({ error: 'Domain not allowed' });
-}
-```
-
----
-
-### Analytics Privacy
-
-1. **Minimize data collection:** Only collect what you need (URL, timestamp, event type).
-2. **Anonymize user identifiers:** Use a hash or UUID instead of IP addresses or user emails.
-3. **Data retention:** Delete old analytics after 90 days (GDPR/CCPA compliance).
-4. **Compliance:** Add a privacy policy; inform users about analytics collection.
-
----
-
-### CORS & Content Security Policy
-
-**CORS headers (set in proxy or analytics server):**
-```javascript
-res.set('Access-Control-Allow-Origin', process.env.ALLOWED_ORIGINS || '*');
-res.set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
-res.set('Access-Control-Allow-Headers', 'Content-Type, X-Proxy-Token');
-```
-
-**Content Security Policy (in index.html):**
-```html
-<meta http-equiv="Content-Security-Policy" content="
-  default-src 'self';
-  script-src 'self' 'unsafe-inline';
-  style-src 'self' 'unsafe-inline';
-  img-src 'self' data: https:;
-  frame-src *;
-  connect-src 'self' https:;
-">
-```
-
----
-
-## Bonus: FAULTLINE Game
-
-This repo also ships **FAULTLINE**, a fast-paced endless combat game built into the same codebase. Fight enemies, dodge obstacles, and upgrade your arsenal.
-
-### Game Features
-
-- **Responsive combat system:** Fast-paced real-time action with precise hit detection
-- **Multiple weapons:** AR, SMG, Shotgun, Pistol — each with unique fire rates, spread, and reload times
-- **Advanced player movement:** Wall jumps, double jumps, air strafing, sliding, dashing, and ledge climbing
-- **AI enemies:** Dynamic difficulty; bosses learn and counter your tactics (optional AI learning mode)
-- **Ragdoll physics:** Defeated enemies ragdoll dynamically; bullets have realistic impulse
-- **Advanced settings:** Customize enemy AI, difficulty scaling, weapon balance, and movement parameters
-- **Endless mode:** Infinite waves with progressive difficulty; survival as long as you can
-- **Boss encounters:** Special boss enemies with unique patterns and higher health pools
-
-### Game Configuration
-
-All game balance is defined in `app.js` via JavaScript constants:
-
-#### Movement Config (MOVE):
-- **Acceleration:** Ground and air movement speeds
-- **Jump mechanics:** Double jump, wall jump, jump buffer, coyote frames
-- **Strafe system:** Momentum-based air movement with super strafe and ease modes
-- **Slide mechanics:** Slide boost, friction, directional tapping windows
-- **Dash ability:** Speed, duration, cooldown
-
-#### Weapons (WEAPONS):
-```javascript
-{
-  ar: { damage: 1, spread: 0, fireCooldown: 1/9, clipSize: 60, personality: "STEADY" },
-  pistol: { damage: 2, spread: 0.025, fireCooldown: 0.26, clipSize: 12, personality: "HEAVY" },
-  smg: { damage: 1, spread: 0.075, fireCooldown: 1/13, clipSize: 36, personality: "SPRAY" },
-  shotgun: { damage: 2, spread: 0.28, fireCooldown: 0.72, clipSize: 6, personality: "EMERGENCY" }
-}
-```
-
-#### Enemy AI & Performance (ENEMY_PERF):
-- **Pool max:** Maximum enemies in memory (96)
-- **Max onscreen:** Draw limit for performance (24)
-- **AI distance:** Full AI beyond 1550px; simple AI at 2450px
-- **Batch frames:** Update AI every 3 frames to reduce CPU
-
-#### Animation Frames (PLAYER_PUNCH_FRAMES, PLAYER_KICK_FRAMES):
-- **8-frame keyframe arrays:** Precise joint angles for punch and kick animations
-- **Lean, reach, bend:** Full body animation with angular constraints
-- Smooth interpolation between frames
-
-### How to Adjust Difficulty
-
-**Easier:**
-- Increase `ENEMY_PERF.maxOnscreen` (draw more enemies)
-- Decrease `ENEMY_STREAM.maxLive` (spawn fewer total)
-- Increase weapon `damage`
-- Decrease `MOVE.gravity` (floatier feel)
-
-**Harder:**
-- Increase `ENEMY_PERF.fullAiDistance` (smarter AI at range)
-- Increase `ENEMY_STREAM.refillInterval` (spawn faster)
-- Decrease weapon `damage` and increase `fireCooldown`
-- Increase `PLAYER_PUNCH_FRAMES` reach to require precision
-
----
-
-## Troubleshooting
-
-### Q: Iframe doesn't load; I see CORS error in console
-
-**A:** This is expected for third-party sites with strict CORS policies. Solutions:
-1. Use the **proxy server** to fetch server-side (header injection mode).
-2. Load a site that allows framing (many news sites, GitHub, YouTube do).
-3. Test with a local file server that sets permissive CORS headers (see `proxy-server.js` for example).
-
----
-
-### Q: Analytics events aren't arriving at the server
-
-**A:** Check:
-1. Is the analytics server running? (`node analytics-server.js`)
-2. Is the endpoint URL correct in the UI?
-3. Do browser console logs show fetch errors? (Open DevTools → Network tab)
-4. Is CORS enabled on the analytics server? (Proxy sets it by default)
-
-**Debug:** Add this to `app.js` to log all analytics events:
-```javascript
-console.log('[Analytics]', JSON.stringify(event, null, 2));
-```
-
----
-
-### Q: Proxy returns 401 Unauthorized
-
-**A:** Your token is wrong or missing. Check:
-1. Is `PROXY_TOKEN` set in `.env`?
-2. Is the token in the UI **Proxy Settings** panel exactly the same as in `.env`?
-3. Have you restarted `proxy-server.js` after changing `.env`?
-
----
-
-### Q: I want to adjust game difficulty / animation speed / weapon balance
-
-**A:** Edit the constants at the top of `app.js`:
-- `MOVE`: Player movement and jump mechanics
-- `WEAPONS`: Damage, fire rate, spread, reload time
-- `ENEMY_PERF`: AI intensity and performance tuning
-- `PLAYER_PUNCH_FRAMES` / `PLAYER_KICK_FRAMES`: Animation keyframes
-
-All changes take effect on next page reload (no build required).
-
----
-
-### Q: How do I deploy to production?
-
-**Static client (V3):**
-- GitHub Pages: Push to `gh-pages` branch
-- Netlify: Connect repo, auto-deploys on push
-- Vercel: Similar to Netlify
-- S3 + CloudFront: Upload `index.html`, `app.js`, `styles.css`, `presets.json`, `utils.js`
-
-**Optional servers (proxy + analytics):**
-- Proxy: Deploy to Vercel Serverless, Heroku, or your VPS
-- Analytics: Small Node app; runs on Heroku free tier or any Node host
-- For scale, replace analytics server with managed service (BigQuery, Segment, Amplitude)
-
----
-
-## License & Contributing
-
-This project is provided as-is for educational and commercial use. Modify and distribute freely with attribution.
-
-**Contributions welcome:** Open issues for bugs, feature requests, or optimizations. PRs gladly accepted.
-
----
-
-## Quick Links
-
-- **GitHub Issues:** Report bugs and request features
-- **Security:** Do not open security issues publicly; email maintainers privately
-- **Discussions:** Join conversations about features and best practices
-
----
-
-**Happy iframe loading! 🚀**
+git checkout v3
