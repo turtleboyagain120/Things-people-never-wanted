@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 180" role="img" aria-labelledby="title desc">
-  <title id="title">Shield Icon</title>
-  <desc id="desc">Cyan shield pickup icon.</desc>
-  <rect width="160" height="180" fill="#061116"/>
-  <path d="M80 20l52 20v42c0 44-24 68-52 82-28-14-52-38-52-82V40z" fill="#10262b" stroke="#4df7ff" stroke-width="8" filter="url(#glow)"/>
-  <path d="M80 36v108" stroke="#ecfbff" stroke-width="5" opacity=".42"/>
-  <path d="M44 58l36-14 36 14" stroke="#4df7ff" stroke-width="5" fill="none" opacity=".7"/>
-  <defs><filter id="glow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
-</svg>

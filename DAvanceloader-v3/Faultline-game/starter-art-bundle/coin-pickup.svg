@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" role="img" aria-labelledby="title desc">
-  <title id="title">Coin Pickup</title>
-  <desc id="desc">Glowing yellow pickup coin.</desc>
-  <rect width="180" height="180" fill="#061116"/>
-  <circle cx="90" cy="90" r="54" fill="#241f0b" stroke="#ffd166" stroke-width="8" filter="url(#glow)"/>
-  <circle cx="90" cy="90" r="32" fill="none" stroke="#ffec99" stroke-width="5"/>
-  <path d="M90 58v64M75 70h30M75 110h30" stroke="#ffd166" stroke-width="6" stroke-linecap="round"/>
-  <defs><filter id="glow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
-</svg>
