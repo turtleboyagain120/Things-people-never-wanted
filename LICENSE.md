@@ -1,3 +1,41 @@
+# FomPSL 4.0 EULA
+**Governing License: Freedom of MIT Personal Sequel License (fomPsL) 4.0**
+**Version 1.0 | August 21, 2026**
+
+**Copyright © 2026 turtleboyagain120. All rights reserved.**
+
+### **Preamble and Acceptance**
+By installing or opening this software (the "Software"), you are acknowledging that your use of the Software is governed by both the terms set out in this End-User Agreement and, critically, the full legal stipulations contained in the appended **Freedom of MIT Personal Sequel License (fomPsL) 4.0**. You agree to abide by all rules in both sections.
+
+---
+
+### **1. Scope of Use**
+The Software is a digital product that includes the core program and any accompanying modules. We encourage you to treat this tool as a collaborative, community-focused resource, aligning with open-source principles where applicable.
+
+**Crucial Warning:** Notwithstanding the spirit of open source best practices mentioned here, *all* usage rights are strictly limited by the terms defined in the `fomPsL 4.0` appendix, which supersedes any general statements of permission made above.
+
+---
+
+### **2. User Responsibility and Best Practices (Good Use)**
+We recommend that all users follow these guidelines to ensure safe and productive use:
+
+*   **Safety First:** Never open files or run code from unknown sources.
+*   **Ethics:** Ensure the content you create is kind, helpful, and does not target any individual or group negatively.
+*   **Learning & Building:** Use this tool to write stories, draw maps, build small games, and explore new ideas. We encourage learning!
+*   **Maintenance:** When you finish using the software, close it properly. If you make a mistake, use the undo feature—it's always there.
+*   **Privacy & Data:** Never share passwords or personal data with anyone unless you are absolutely certain of their identity and trustworthiness.
+
+### **3. Restrictions (Bad Use)**
+The following activities are strictly prohibited and constitute a violation of the `fomPsL 4.0`:
+*   Illegal actions, fraud, defamation, hate-speech, or any attempt to cause harm.
+*   Unauthorized access to private data or systems.
+*   Hacking, spamming, or any attempts to break the system for personal gain.
+*   Using the Software in any way that violates the explicit terms of `fomPsL 4.0`.
+
+### **4. AI/ML Outputs and Liability**
+The Software uses advanced models that are probabilistic—meaning their outputs are educated guesses, not guaranteed facts or truths. You must assume full responsibility for vetting every piece of information you use from this tool. We provide the software "AS IS," without warranty.
+
+---
 # **Freedom of MIT Personal Sequel License (fomPsL) 4.0**
 
 **Copyright © 2026 turtleboyagain120. All rights reserved.**
